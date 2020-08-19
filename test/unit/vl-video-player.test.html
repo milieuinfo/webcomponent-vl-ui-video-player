@@ -1,0 +1,45 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <script src="../../../@webcomponents/webcomponentsjs/webcomponents-lite.js"></script>
+  <script src="../../../web-component-tester/browser.js"></script>
+
+  <script type="module" src="../../src/vl-video-player.js"></script>
+  <script src="/node_modules/sinon/pkg/sinon.js"></script>
+</head>
+
+<body>
+  <test-fixture id="vl-video-player-fixture">
+    <template>
+      <video is="vl-video-player"></video>
+    </template>
+  </test-fixture>
+
+  <script>
+    suite('vl-video-player', () => {
+      const sandbox = sinon.createSandbox();
+
+      test('het data-vl-video-player attribuut wordt toegevoegd', () => {
+        const video = fixture('vl-video-player-fixture');
+        assert.isTrue(video.hasAttribute('data-vl-video-player'));
+      });
+
+      test('er wordt een video container element toegevoegd', () => {
+        const video = fixture('vl-video-player-fixture');
+        const parent = video.parentElement;
+        assert.isTrue(parent.classList.contains('vl-video-player'));
+        assert.equal(parent.children[0], video);
+      });
+
+      test('de dress functie wordt correct aangeroepen', () => {
+        sandbox.spy(vl.videoPlayer, 'dress');
+        fixture('vl-video-player-fixture');
+        assert.isTrue(vl.videoPlayer.dress.called);
+      });
+    });
+  </script>
+</body>
+
+</html>
