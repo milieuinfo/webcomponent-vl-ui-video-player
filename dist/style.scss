@@ -17,3 +17,7 @@
 // Components
 // ==========================================================================
 @import "vl-ui-video-player/src/scss/video-player";
+
+[is="vl-video-player"] {
+    width: 100%;
+}
