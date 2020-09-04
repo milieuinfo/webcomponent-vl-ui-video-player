@@ -25,16 +25,23 @@ export class VlVideoPlayer extends nativeVlElement(HTMLVideoElement) {
   }
 
   get _hasContainer() {
-    return this.parentElement.classList.contains('vl-video-player');
+    return this.closest('.vl-video-player') != undefined;
+  }
+
+  get _isDressed() {
+    return this.hasAttribute('data-vl-video-player-dressed');
   }
 
   _processStyle() {
     this.setAttribute('data-vl-video-player', '');
     this._addContainerElement();
+    this._dress();
   }
 
   _dress() {
-    vl.videoPlayer.dress(this);
+    if (!this._isDressed) {
+      vl.videoPlayer.dress(this);
+    }
   }
 
   _addContainerElement() {
@@ -42,7 +49,6 @@ export class VlVideoPlayer extends nativeVlElement(HTMLVideoElement) {
       const container = this._containerTemplate.firstElementChild;
       this.parentElement.append(container);
       container.append(this);
-      this._dress();
     }
   }
 }
