@@ -17,7 +17,9 @@
     </template>
   </test-fixture>
 
-  <script>
+  <script type="module">
+    import {awaitUntil} from 'vl-ui-core/dist/vl-core';
+
     suite('vl-video-player', () => {
       const should = chai.should();
       const sandbox = sinon.createSandbox();
@@ -31,10 +33,13 @@
         assert.isTrue(video.hasAttribute('data-vl-video-player'));
       });
 
-      test('er wordt een video container element toegevoegd', () => {
+      test('er wordt een video container element toegevoegd', (done) => {
         const video = fixture('vl-video-player-fixture');
-        const parent = video.closest('.vl-video-player');
-        should.exist(parent);
+        awaitUntil(() => video._isDressed).then(() => {
+          const parent = video.closest('.vl-video-player');
+          should.exist(parent);
+          done();
+        });
       });
 
       test('de dress functie wordt correct aangeroepen', () => {
