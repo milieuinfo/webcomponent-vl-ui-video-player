@@ -19,7 +19,12 @@
 
   <script>
     suite('vl-video-player', () => {
+      const should = chai.should();
       const sandbox = sinon.createSandbox();
+
+      teardown(() => {
+        sandbox.reset();
+      });
 
       test('het data-vl-video-player attribuut wordt toegevoegd', () => {
         const video = fixture('vl-video-player-fixture');
@@ -28,9 +33,8 @@
 
       test('er wordt een video container element toegevoegd', () => {
         const video = fixture('vl-video-player-fixture');
-        const parent = video.parentElement;
-        assert.isTrue(parent.classList.contains('vl-video-player'));
-        assert.equal(parent.children[0], video);
+        const parent = video.closest('.vl-video-player');
+        should.exist(parent);
       });
 
       test('de dress functie wordt correct aangeroepen', () => {
