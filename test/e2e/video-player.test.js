@@ -1,10 +1,11 @@
-const {assert, driver} = require('vl-ui-core').Test.Setup;
+const {assert, getDriver} = require('vl-ui-core').Test.Setup;
 const VlVideoPlayerPage = require('./pages/vl-video-player.page');
 
 describe('vl-video-player', async () => {
-  const vlVideoPlayerPage = new VlVideoPlayerPage(driver);
+  let vlVideoPlayerPage;
 
   before(() => {
+    vlVideoPlayerPage = new VlVideoPlayerPage(getDriver());
     return vlVideoPlayerPage.load();
   });
 
