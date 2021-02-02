@@ -1,6 +1,6 @@
 {
 	"name": "vl-ui-video-player",
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"description": "Een toegankelijke video speler met HTML5, YouTube en Vimeo ondersteuning.",
 	"author": "DIDM",
 	"license": "MIT",
